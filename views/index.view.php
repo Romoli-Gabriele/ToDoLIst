@@ -3,6 +3,7 @@
         <title>Lista</title>
     </head>
     <body>
+        <a href="/about">About Us</a>
         <h1>Lista cose da fare:</h1>
         <ul>
         <?php foreach($tasks as $task) : ?>

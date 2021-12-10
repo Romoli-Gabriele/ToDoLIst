@@ -3,6 +3,16 @@ class router{
 
     protected $routes;
 
+    static function  load($file){
+        
+        $router = new static;
+
+        require $file;
+
+        return $router;
+
+    }
+
     function define($routes){
 
         $this->routes= $routes;

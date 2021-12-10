@@ -5,8 +5,9 @@ class Connection
 
     static function make($database)
     {
-        try {
 
+        try {
+            
             return $pdo = new PDO(
                 $database["connection"] .
                 ";dbname=" .
