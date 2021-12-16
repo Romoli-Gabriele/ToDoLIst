@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>About Us</title>
-    </head>
-    <body>
+<?php require "partials/head.php"; ?>
         <h1>Chi siamo?</h1>
 
         <h3>Viva la.. Cultura!</h3>
-    </body>
-</html>
+<?php require "partials/footer.php"; ?>

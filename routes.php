@@ -1,7 +1,8 @@
 <?php 
-$router->define ([
-    "" => "controllers/index.php",
-    "about" => "controllers/aboutUs.php",
-    "about-colture"=>"controllers/about-colture.php",
-    "contacts" => "controllers/contacts.php"
-]);
+
+$router->get("","controllers/index.php");
+$router->get("about","controllers/aboutUs.php");
+$router->get("about-colture","controllers/about-colture.php");
+$router->get("contacts","controllers/contacts.php");
+
+$router->post("add-new", "controllers/add-new.php");

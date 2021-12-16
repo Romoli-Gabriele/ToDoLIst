@@ -1,7 +1,10 @@
 <?php 
 class router{
 
-    protected $routes;
+    protected $routes = [
+        "GET"=>[],
+        "POST"=>[]
+    ];
 
     static function  load($file){
         
@@ -13,14 +16,18 @@ class router{
 
     }
 
-    function define($routes){
 
-        $this->routes= $routes;
+    function get($uri, $controller){
+        $this->routes["GET"][$uri] = $controller;
     }
 
-    function direct($uri){
-        if(array_key_exists($uri,$this->routes)){
-            return $this->routes[$uri];
+    function post($uri, $controller){
+        $this->routes["POST"][$uri] = $controller;
+    }
+    
+    function direct($uri, $requestType){
+        if(array_key_exists($uri,$this->routes[$requestType])){
+            return $this->routes[$requestType][$uri];
         }
         throw new Exception("Non ci sono route definite per questa uri");
     }

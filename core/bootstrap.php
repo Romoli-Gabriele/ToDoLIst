@@ -1,10 +1,6 @@
 <?php
-require "core/database/Connection.php";
-require "core/database/QueryBuilder.php";
-require "core/task.php";
-require "core/router.php";
-require "Request.php";
 
+require "vendor/autoload.php";
 
 $config = require "config.php";
 

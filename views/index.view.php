@@ -1,18 +1,23 @@
-<html>
-    <head>
-        <title>Lista</title>
-    </head>
-    <body>
-        <a href="/about">About Us</a>
-        <h1>Lista cose da fare:</h1>
-        <ul>
-        <?php foreach($tasks as $task) : ?>
+<?php require "partials/head.php" ?>
+    <h1>Lista cose da fare:</h1>
+
+    <form method="POST" action="/add-new">
+        <input type="text" name="descrizione" placeholder="descrizione">
+        <label>Terminata</label>
+        <input type="checkbox" name="terminata">
+        <button type="submit">Invia</button>
+    </form>
+
+    <ul>
+        <?php foreach ($tasks as $task) : ?>
             <li><?php echo "$task->descrizione ";
-            if($task->terminata){echo "&#10004";
-            }else{echo "<b>da Fare</b>";}  
-            ?>
+                if ($task->terminata) {
+                    echo "&#10004";
+                } else {
+                    echo "<b>da Fare</b>";
+                }
+                ?>
             </li>
         <?php endforeach ?>
-        </ul>
-    </body>
-</html>
+    </ul>
+<?php require "partials/footer.php"; ?>
