@@ -1,10 +1,8 @@
 <?php
 
-require "vendor/autoload.php";
-
-$config = require "config.php";
+App::bind("config", $config = require "config.php");
 
 
-return new queryBuilder(
+App::bind("database",  new queryBuilder(
     Connection::make($config["database"])
-);
+));

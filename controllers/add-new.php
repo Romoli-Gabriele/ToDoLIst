@@ -1,6 +1,6 @@
 <?php 
-$config = require "config.php";
-$database= $config["database"];
+
+$database= App::get("config")["database"];
 
 if(isset($_POST["terminata"])){
     $terminata = 1;
@@ -12,9 +12,9 @@ $newTask = [
     "terminata"=>$terminata
 ];
 
-$query->insertTask($database["tableName"], $newTask);
+App::get("database")->insertTask($database["tableName"], $newTask);
 
-$tasks = $query->selectAll($database["tableName"], $database["className"]);
+$tasks = App::get("database")->selectAll($database["tableName"], $database["className"]);
 
 require "views/index.view.php";
 
