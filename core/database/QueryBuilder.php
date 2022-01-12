@@ -14,6 +14,7 @@ class queryBuilder
     }
     function insertTask($table, $task){
         $sql = "insert into {$table} (descrizione, terminata) values('{$task['descrizione']}', {$task['terminata']})";
+        //var_dump(die($sql));
         $statement = $this->pdo->prepare($sql);
         $statement->execute();
     }

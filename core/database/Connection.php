@@ -10,8 +10,8 @@ class Connection
             
             return $pdo = new PDO(
                 $database["connection"] .
-                ";dbname=" .
-                $database["name"],
+                "; dbname=" .
+                $database["name"].'; charset=utf8mb4',
                 $database["username"],
                 $database["password"],
                 $database["options"]

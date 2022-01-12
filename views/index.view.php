@@ -3,14 +3,12 @@
 
     <form method="POST" action="/add-new">
         <input type="text" name="descrizione" placeholder="descrizione">
-        <label>Terminata</label>
-        <input type="checkbox" name="terminata">
         <button type="submit">Invia</button>
     </form>
 
     <ul>
         <?php foreach ($tasks as $task) : ?>
-            <li><?php echo "$task->descrizione ";
+            <li><?php echo $task->descrizione();
                 if ($task->terminata) {
                     echo "&#10004";
                 } else {

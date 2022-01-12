@@ -1,7 +1,7 @@
 <?php
 require "vendor/autoload.php";
 $query = require "./core/bootstrap.php";
-
+$key = "chiave di cifratura";
 $router = new router();
 require "routes.php";
 

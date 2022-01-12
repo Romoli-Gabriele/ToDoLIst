@@ -2,14 +2,10 @@
 
 $database= App::get("config")["database"];
 
-if(isset($_POST["terminata"])){
-    $terminata = 1;
-}else{
-    $terminata = 0;
-}
+
 $newTask = [
-    "descrizione"=>$_POST["descrizione"], 
-    "terminata"=>$terminata
+    "descrizione"=>Crypt::encrypt($_POST["descrizione"]), 
+    "terminata"=>"false"
 ];
 
 App::get("database")->insertTask($database["tableName"], $newTask);
