@@ -11,7 +11,9 @@ class Connection
             return $pdo = new PDO(
                 $database["connection"] .
                 "; dbname=" .
-                $database["name"].'; charset=utf8mb4',
+                $database["name"].
+                "; collation=".
+                $database["collation"],
                 $database["username"],
                 $database["password"],
                 $database["options"]
