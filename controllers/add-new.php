@@ -1,16 +1,16 @@
 <?php 
-
-$database= App::get("config")["database"];
+$config = require "config.php";
+$database= $config["database"];
 
 
 $newTask = [
     "descrizione"=>Crypt::encrypt($_POST["descrizione"]), 
     "terminata"=>"false"
 ];
+//die(var_dump($newTask));
+$query->insertTask($database["tableName"], $newTask);
 
-App::get("database")->insertTask($database["tableName"], $newTask);
-
-$tasks = App::get("database")->selectAll($database["tableName"], $database["className"]);
+$tasks = $query->selectAll($database["tableName"], $database["className"]);
 
 require "views/index.view.php";
 

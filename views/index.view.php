@@ -12,7 +12,7 @@
                 if ($task->terminata) {
                     echo "&#10004";
                 } else {
-                    echo "<b>da Fare</b>";
+                    echo "<a href='http://localhost:8000/done/?id=".$task->id."'><b> da Fare</b></a>";
                 }
                 ?>
             </li>

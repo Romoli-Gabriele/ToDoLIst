@@ -14,11 +14,12 @@ class task
     $this -> terminata = 'false';
    }
     */
-    public function complete()
+    public function id()
     {
-        $this->terminata = true;
+        return $this->id;
     }
     public function descrizione(){
         return Crypt::decrypt($this->descrizione);
     }
+
 }

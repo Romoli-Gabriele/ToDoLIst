@@ -1,8 +1,14 @@
 <?php
 
-App::bind("config", $config = require "config.php");
-App::bind("crypt", $crypt = require 'blowfish.php');
+$config = require "config.php";
+$crypt = require 'blowfish.php';
 
-App::bind("database",  new queryBuilder(
+require "vendor/autoload.php";
+
+$config = require "config.php";
+
+
+
+return new queryBuilder(
     Connection::make($config["database"])
-));
+);
