@@ -19,7 +19,8 @@ class task
         return $this->id;
     }
     public function descrizione(){
-        return Crypt::decrypt($this->descrizione);
+        
+        return openssl_private_decrypt($this->descrizione, $decrypted, $this->privKey);
     }
 
 }

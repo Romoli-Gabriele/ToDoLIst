@@ -1,7 +1,7 @@
 <?php
-
+require 'blowfish.php';
 $config = require "config.php";
-$crypt = require 'blowfish.php';
+
 
 require "vendor/autoload.php";
 

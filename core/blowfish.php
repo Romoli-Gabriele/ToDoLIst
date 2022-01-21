@@ -1,30 +1,34 @@
 <?php
 class Crypt
 {
+    public $config;
+    public $pubKey;
+    private $res;
+    private $privKey;
 
-
-    static function encrypt($data)
+    function __construct()
     {
-        $key = 'chiave di cifratura';
-        $l = strlen($key);
-        if ($l < 16) {
-            $key = str_repeat($key, ceil(16 / $l));
-        }
-
-        if ($m = strlen($data) % 8) {
-            $data .= str_repeat("\x00",  8 - $m);
-        }
-        return openssl_encrypt($data, 'BF-ECB', $key, OPENSSL_RAW_DATA | OPENSSL_NO_PADDING);
+        $this->config = array(
+            "digest_alg" => "sha512",
+            "private_key_bits" => 4096,
+            "private_key_type" => OPENSSL_KEYTYPE_RSA,
+        );
+        $this->res = openssl_pkey_new($this->config);
+        if(!openssl_pkey_export($this->res, $this->privKey)) die('Failed to retrieve private key');
+        $this->pubKey = openssl_pkey_get_details($this->res);
+        $this->pubKey = $this->pubKey["key"];
+    }
+   
+    public function encrypt($data)
+    {
+        
+        openssl_public_encrypt($data, $encrypted, $this->pubKey);
+        return $encrypted;
     }
 
-    static function decrypt($data)
+    function decrypt($encrypted)
     {
-        $key = 'chiave di cifratura';
-        $l = strlen($key);
-        if ($l < 16) {
-            $key = str_repeat($key, ceil(16 / $l));
-        }
-
-        return  openssl_decrypt($data, 'BF-ECB', $key, OPENSSL_RAW_DATA | OPENSSL_NO_PADDING);
+        openssl_private_decrypt($encrypted, $decrypted, openssl_pkey_get_private($this->privKey, "phrase"));
+        return $decrypted;
     }
 }

@@ -13,8 +13,12 @@ class queryBuilder
         return $statement->fetchAll(PDO::FETCH_CLASS, $intoClass);
     }
     function insertTask($table, $task){
-        $sql = "insert into {$table} (descrizione, terminata) values('{$task['descrizione']}', {$task['terminata']})";
-        $this->execute($sql);
+        $descrizione = $task["descrizione"];
+        $sql = "INSERT INTO {$table} (descrizione, terminata) VALUES (:descrizione, {$task['terminata']})";
+       var_dump($sql);
+       $statement = $this->pdo->prepare($sql);
+       $statement->bindParam(':descrizione', $descrizione, PDO::PARAM_LOB);
+       $statement->execute();
     }
     function doneTask($id){
         $sql = "UPDATE `tasks` SET `terminata`='1' WHERE `id`= {$id};";

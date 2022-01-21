@@ -8,7 +8,7 @@
 
     <ul>
         <?php foreach ($tasks as $task) : ?>
-            <li><?php echo $task->descrizione();
+            <li><?php echo $crypt->decrypt($task->descrizione);
                 if ($task->terminata) {
                     echo "&#10004";
                 } else {

@@ -1,8 +1,8 @@
 <?php
 
 $query = require "./core/bootstrap.php";
-$key = "chiave di cifratura";
 $router = new router();
+$crypt = new Crypt();
 require "routes.php";
 
 
