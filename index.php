@@ -2,7 +2,11 @@
 
 $query = require "./core/bootstrap.php";
 $router = new router();
-$crypt = new Crypt();
+session_start();
+if(!isset($_SESSION['crypt'])){
+    $_SESSION['crypt'] = new Crypt();
+}
+$crypt = $_SESSION['crypt'];
 require "routes.php";
 
 
