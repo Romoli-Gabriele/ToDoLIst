@@ -17,6 +17,10 @@ class Crypt
         if(!openssl_pkey_export($this->res, $this->privKey)) die('Failed to retrieve private key');
         $this->pubKey = openssl_pkey_get_details($this->res);
         $this->pubKey = $this->pubKey["key"];
+        file_put_contents('private_key.pem', $this->privKey);
+        file_put_contents('public_key.pem', $this->pubKey);
+        $this->privKey = openssl_pkey_get_private(file_get_contents('/Keys/private_key.pem'));
+        $this->privKey = openssl_pkey_get_private(file_get_contents('/Keys/public_key.pem'));
     }
    
     public function encrypt($data)
