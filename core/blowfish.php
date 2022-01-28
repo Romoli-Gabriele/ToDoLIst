@@ -1,27 +1,34 @@
 <?php
-use ParagonIE\EasyRSA\KeyPair;
-use ParagonIE\EasyRSA\EasyRSA;
-
 class Crypt
 {
-    private $keyPair;
-    private $secretKey;
-    public $publicKey;
+    public $config;
+    public $pubKey;
+    private $res;
+    private $privKey;
 
     function __construct()
     {
-        $this->keyPair = KeyPair::generateKeyPair(4096);
-        $this->secretKey  = $this->keyPair->getPrivateKey();
-        $this->publicKey = $this->keyPair->getPublicKey();
+        $this->config = array(
+            "digest_alg" => "sha512",
+            "private_key_bits" => 4096,
+            "private_key_type" => OPENSSL_KEYTYPE_RSA,
+        );
+        $this->res = openssl_pkey_new($this->config);
+        if(!openssl_pkey_export($this->res, $this->privKey)) die('Failed to retrieve private key');
+        $this->pubKey = openssl_pkey_get_details($this->res);
+        $this->pubKey = $this->pubKey["key"];
     }
-
+   
     public function encrypt($data)
     {
-        return EasyRSA::encrypt($data, $this->publicKey);
+        
+        openssl_public_encrypt($data, $encrypted, $this->pubKey);
+        return $encrypted;
     }
 
     function decrypt($encrypted)
     {
-        return EasyRSA::decrypt($encrypted, $this->secretKey);
+        openssl_private_decrypt($encrypted, $decrypted, openssl_pkey_get_private($this->privKey, "phrase"));
+        return $decrypted;
     }
 }
